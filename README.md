@@ -76,7 +76,7 @@ Sobrevivieron: 88 (32.59%).
 No sobrevivieron: 182 (67.40%).  
 7. Gáficos
 ![Análisis TiTanic.](https://github.com/franklueza/CasoPracticoR/blob/6c9b30e63cee3516a5aa92f264bdcbae5d4fbf36/ConjuntoGraficas.png)
-##Conclusiones  
+### Resumen 
 El análisis exploratorio del conjunto de datos del Titanic revela patrones significativos en las características de los pasajeros que influyeron en su probabilidad de supervivencia. En primer lugar, el género fue el factor más determinante: todas las mujeres a bordo sobrevivieron, mientras que ningún hombre logró hacerlo. Además, la clase socioeconómica jugó un papel crucial, con pasajeros de primera clase mostrando las mayores tasas de supervivencia (46.7%), seguidos por aquellos de segunda clase (32.3%) y tercera clase (33.0%). Este patrón refuerza la idea de que el acceso prioritario a los botes salvavidas estuvo influenciado por el estatus socioeconómico.
 
 En cuanto a la edad, los adultos (18–65 años) representaron la mayoría de los sobrevivientes (35.73%), aunque los niños (< 18 años) también mostraron una tasa considerable de supervivencia (41.46%). Sorprendentemente, los ancianos (≥ 65 años) tuvieron una tasa de supervivencia del 50%, lo que sugiere que, aunque su número era reducido, algunos lograron sobrevivir. Por último, el puerto de embarque también mostró diferencias notables: Queenstown registró la mayor proporción de sobrevivientes (52.2%), seguido por Cherbourg (39.2%) y Southampton (32.6%). Estos hallazgos subrayan cómo factores como género, clase socioeconómica, edad y ubicación de embarque definieron las posibilidades de supervivencia en esta tragedia.
