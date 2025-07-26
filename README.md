@@ -81,6 +81,7 @@ El análisis destaca que:
 El Género fue el factor más determinante para la supervivencia, con todas las mujeres sobreviviendo y ningún hombre sobrevivio.
 La Clase socioeconómica también influyó significativamente, con pasajeros de primera clase teniendo mayores probabilidades de sobrevivir.
 La Edad mostró patrones claros: niños y mujeres tuvieron mayores tasas de supervivencia, mientras que ancianos no sobrevivieron a excepción de 1.
+Los pasajeros que embarcaron en Queenstonw tuvieron un procentaje mayor de sobrevivencia del 52.2% respecto a los otros dos.
 
 
 
