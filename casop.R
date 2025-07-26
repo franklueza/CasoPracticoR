@@ -9,10 +9,8 @@ install.packages(c("skimr", "janitor", "DataExplorer"))
 
 library(tidyverse)
 library(skimr)
-library(janitor)
-library(DataExplorer)
 
-
+  
 # Leyendo el archivo
 
 titanic <- read.csv("Titanicv2.csv")
@@ -102,6 +100,7 @@ edad_max <- max(df_titanic$Edad)
 print(edad_max)
 
 # Crear un boxplot de la columna "Edad"
+
 ggplot(df_titanic, aes(x = "", y = Edad)) +  # "" para un solo grupo
   geom_boxplot() +
   labs(
@@ -123,17 +122,19 @@ df_titanic %>%
   labs(title = "Recuento de Sobrevivientes por Género", x = "Género", y = "Recuento")
 
 
-# Vamos a crear una tabla con los porcentajes de sobreviviente
+# Vamos a crear una tabla con los porcentajes de sobrevivientes
 
-porcentaje_tabla <- df_titanic %>% 
-  group_by(Sexo, Sobreviviente) %>% 
+porcentaje_tabla <- df_titanic %>%
+  group_by(Sexo, Sobreviviente) %>%
   summarise(count = n(), .groups = 'drop') %>%
-  mutate(porcentaje = count/sum(count) * 100)
+  mutate(porcentaje = count / sum(count) * 100)
 
 porcentaje_tabla
 
-# Female 152 (36.4%)
-# Male 266 (63.6%)
+# Sexo   Sobreviviente count porcentaje
+# female Yes             152       36.4
+# male   No              266       63.6
+
 
 #______________
 
@@ -144,6 +145,27 @@ df_titanic %>%
   geom_histogram(binwidth = 5, position = "identity", alpha = 0.6) +
   labs(title = "Distribución de Edad y Supervivencia", x = "Edad", y = "Frecuencia")
 
+
+
+# Filtrar solo a las mujeres
+mujeres <- df_titanic %>%
+  filter(Sexo == "female")
+
+# Crear una tabla de contingencia para sobrevivientes y no sobrevivientes
+recuento_mujeres <- table(mujeres$Sobreviviente)
+
+# Mostrar el recuento
+print(recuento_mujeres)
+
+# Filtrar solo a los hombres
+hombres <- df_titanic %>%
+  filter(Sexo == "male")
+
+# Crear una tabla de contingencia para sobrevivientes y no sobrevivientes
+recuento_hombres <- table(hombres$Sobreviviente)
+
+# Mostrar el recuento
+print(recuento_hombres)
 
 #______________
 
@@ -193,6 +215,33 @@ sobrevivientes %>%
   ggplot(aes(x = Nivel_Socieconomico, y = Edad, fill = Nivel_Socieconomico)) +
   geom_boxplot() +
   labs(title = "Distribución de Edades de Sobrevivientes por Clase", x = "Clase", y = "Edad")
+#________
+# Crear una tabla con los conteos y porcentajes
+datos_nivel_socioeconomico <- df_titanic %>%
+  group_by(Nivel_Socieconomico, Sobreviviente) %>%
+  summarise(count = n(), .groups = 'drop') %>%
+  group_by(Nivel_Socieconomico) %>%
+  mutate(porcentaje = count / sum(count) * 100)
+datos_nivel_socioeconomico
+# Convertir a data frame
+datos_nivel_socioeconomico <- as.data.frame(datos_nivel_socioeconomico)
+
+# Crear el gráfico de barras apiladas con porcentajes
+ggplot(datos_nivel_socioeconomico, aes(x = Nivel_Socieconomico, y = count, fill = Sobreviviente)) +
+  geom_bar(stat = "identity", position = "fill") + # Barras apiladas como proporciones
+  geom_text(aes(label = paste0(round(porcentaje, 1), "%")), 
+            position = position_fill(vjust = 0.5), size = 3) + # Agregar porcentajes
+  labs(
+    title = "Proporción de Sobrevivientes por Clase Socioeconómica",
+    x = "Clase Socioeconómica",
+    y = "Proporción"
+  ) +
+  scale_y_continuous(labels = scales::percent_format()) + # Formato de porcentaje en el eje Y
+  theme_minimal() +
+  theme(
+    legend.position = "top", # Posición de la leyenda
+    plot.title = element_text(hjust = 0.5) # Centrar el título
+  )
 
 #_________
 
@@ -273,9 +322,12 @@ prop_edad_supervivencia
 
 ggplot(prop_edad_supervivencia, aes(x = GrupoEdad, y = porcentaje, fill = Sobreviviente)) +
   geom_bar(stat = "identity", position = "fill") +
+  geom_text(aes(label = paste0(round(porcentaje, 1), "%")), 
+            position = position_fill(vjust = 0.5), size = 3) +
   labs(
     title = "Proporción de Sobrevivientes por Grupo de Edad",
     x = "Grupo de Edad",
     y = "Porcentaje"
   ) +
   scale_y_continuous(labels = scales::percent_format())
+  
